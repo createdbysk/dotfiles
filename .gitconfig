@@ -113,9 +113,22 @@
 	autocorrect = 1
 
 [merge]
-
-	# Include summaries of merged commits in newly created merge commit messages
-	log = true
+	tool = kdiff3
+[mergetool "kdiff3"]
+	path = C:/Program Files (x86)/KDiff3/kdiff3.exe
+[diff]
+	guitool = kdiff3
+[difftool "kdiff3"]
+	path = C:/Program Files (x86)/KDiff3/kdiff3.exe
+[core]
+	editor = \"C:/Program Files (x86)/GitExtensions/GitExtensions.exe\" fileeditor
+	autocrlf = true
+	excludesfile = C:\\Users\\skumar7\\Documents\\gitignore_global.txt
+[credential]
+	helper = !\\\"C:/Program Files (x86)/GitExtensions/GitCredentialWinStore/git-credential-winstore.exe\\\"
+[user]
+	name = Satish Kumar
+	email = kumarnotifications@gmail.com
 
 [push]
 
