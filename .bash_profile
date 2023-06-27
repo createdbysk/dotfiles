@@ -1,3 +1,13 @@
+# If the .bash_profile was NOT already loaded through a .bashrc, then load the .bashrc.
+# This solves the problem that in cases like tmux that load a login prompt, .bashrc will
+# still run.
+if [ -n "$BASH_VERSION" ] && [ -z "$BASHRC_LOADED" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+    fi
+fi
+
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
