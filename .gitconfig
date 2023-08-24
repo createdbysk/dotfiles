@@ -13,7 +13,16 @@
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
 	# Pull in remote changes for the current repository and all its submodules
-	p = !"git pull; git submodule foreach git pull origin master"
+	pl = !"git pull; git submodule foreach git pull origin master"
+
+ # Push changes for current repository to remote.
+	p = "!f() { git push origin $(git branch | grep '*' | cut -f 2 -d ' '); }; f"
+	pf = "!f() { git push -f  origin $(git branch | grep '*' | cut -f 2 -d ' '); }; f"
+
+ # Start a new branch
+
+	start = "!f() { git checkout master && git fetch --all && git rebase origin/master && git checkout -b $1; }; f"
+	bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
 
 	# Clone a repository including all submodules
 	c = clone --recursive
