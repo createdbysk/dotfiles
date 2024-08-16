@@ -54,10 +54,13 @@ prompt_git() {
 		[ -n "${s}" ] && s=" [${s}]";
 
 		echo -e "${1}${branchName}${blue}${s}";
+	# Company specific
 	elif which sl &> /dev/null; then
-		# Company specific
-		branchName="$(sl log --template '{phabdiff}' --rev .)";
-		echo -e "${1}${branchName}";
+		if $(sl log --template '{phabdiff}' --rev . &> /dev/null);
+		then
+			branchName="$(sl log --template '{phabdiff}' --rev .)";
+			echo -e "${1}${branchName}";
+		fi
   else
 		return;
 	fi;
